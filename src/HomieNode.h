@@ -48,6 +48,7 @@ public:
 	String strUnit;
 	eHomieDataType datatype=homieString;
 	String strFormat;
+	void * pContext;
 
 	void Init();
 
