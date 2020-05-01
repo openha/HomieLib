@@ -7,7 +7,7 @@
 #else
 #include "WiFi.h"
 #endif
-#include <LeifHomieLib.h>
+#include <HomieLib.h>
 
 #ifndef STASSID
 #define STASSID "your-ssid"
