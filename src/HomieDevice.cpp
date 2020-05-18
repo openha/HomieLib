@@ -123,7 +123,6 @@ bool HomieDevice::IsConnected()
 
 
 int iWiFiRSSI=0;
-int iChannel=0;
 
 void HomieDevice::Loop()
 {
@@ -146,14 +145,6 @@ void HomieDevice::Loop()
 				iWiFiRSSI=iWiFiRSSI_Current;
 
 				Publish(String(strTopic+"/$stats/signal").c_str(), 2, true, String(iWiFiRSSI).c_str());
-			}
-
-			int iChannel_Current=WiFi.channel();
-			if(iChannel!=iChannel_Current)
-			{
-				iChannel=iChannel_Current;
-
-				Publish(String(strTopic+"/$stats/channel").c_str(), 2, true, String(iChannel).c_str());
 			}
 		}
 
@@ -203,6 +194,7 @@ void HomieDevice::Loop()
 			bError |= 0==Publish(String(strTopic+"/$stats/uptime-wifi").c_str(), 2, true, String(ulSecondCounter_WiFi).c_str());
 			bError |= 0==Publish(String(strTopic+"/$stats/uptime-mqtt").c_str(), 2, true, String(ulSecondCounter_MQTT).c_str());
 			bError |= 0==Publish(String(strTopic+"/$stats/signal").c_str(), 2, true, String(WiFi.RSSI()).c_str());
+			bError |= 0==Publish(String(strTopic+"/$stats/channel").c_str(), 2, true, String(WiFi.channel()).c_str());
 
 			if(bError)
 			{
@@ -416,7 +408,7 @@ void HomieDevice::DoInitialPublishing()
 	{
 		bool bError=false;
 
-		bError |= 0==Publish(String(strTopic+"/$stats").c_str(), ipub_qos, true, "uptime,signal,uptime-wifi,uptime-mqtt");
+		bError |= 0==Publish(String(strTopic+"/$stats").c_str(), ipub_qos, true, "uptime,signal,channel,uptime-wifi,uptime-mqtt");
 		bError |= 0==Publish(String(strTopic+"/$stats/interval").c_str(), ipub_qos, true, "60");
 
 		String strNodes;
