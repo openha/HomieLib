@@ -123,6 +123,7 @@ bool HomieDevice::IsConnected()
 
 
 int iWiFiRSSI=0;
+int iChannel=0;
 
 void HomieDevice::Loop()
 {
@@ -137,7 +138,6 @@ void HomieDevice::Loop()
 		ulSecondCounter_WiFi++;
 		ulSecondCounter_MQTT++;
 
-
 		if(bRapidUpdateRSSI && (ulSecondCounter_Uptime & 1))
 		{
 			int iWiFiRSSI_Current=WiFi.RSSI();
@@ -146,6 +146,14 @@ void HomieDevice::Loop()
 				iWiFiRSSI=iWiFiRSSI_Current;
 
 				Publish(String(strTopic+"/$stats/signal").c_str(), 2, true, String(iWiFiRSSI).c_str());
+			}
+
+			int iChannel_Current=WiFi.channel();
+			if(iChannel!=iChannel_Current)
+			{
+				iChannel=iChannel_Current;
+
+				Publish(String(strTopic+"/$stats/channel").c_str(), 2, true, String(iChannel).c_str());
 			}
 		}
 
