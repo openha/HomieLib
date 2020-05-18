@@ -1,5 +1,5 @@
 {
-  "name":"LeifHomieLib",
+  "name":"HomieLib",
   "description":"Light weight homie v3 (MQTT) Library for ESP8266/ESP32",
   "keywords":"mqtt,homie",
   "authors":
@@ -10,12 +10,12 @@
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/liket/leifhomielib.git"
+    "url": "https://github.com/openha/homielib.git"
   },
   "version": "0.0.1",
   "license": "LGPL-3.0",
   "frameworks": "arduino",
-  "platforms": "espressif8266",
+  "platforms": "espressif8266, espressif32",
   "build": {
     "libCompatMode": 2
   }  
